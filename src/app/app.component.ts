@@ -1,22 +1,57 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform , Nav} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { TabsPage } from '../pages/tabs/tabs';
-
+import { HomePage } from '../pages/home/home';
+import { PeoplePage } from '../pages/people/people';
+import {Storage} from '@ionic/storage';
+import { WelcomePage } from '../pages/welcome/welcome';
+import { Events } from 'ionic-angular';
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
-  rootPage:any = TabsPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+
+export class MyApp {
+  rootPage:any = HomePage;
+  @ViewChild(Nav) nav: Nav;
+  pages: Array<{title: string, component: any}>;
+  username = 'Username';
+  email = 'Email';
+  constructor(platform: Platform, 
+    statusBar: StatusBar, 
+    splashScreen: SplashScreen, public events: Events) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
+    this.pages = [
+      {title: 'Home', component: HomePage},
+      {title: 'People', component: PeoplePage}
+    ];
+
+    //setting for the first login
+    this.events.subscribe('logged in', user => {
+      console.log(user);
+      this.username = user['username'];
+      this.email = user['email'];
+    });
+
+    //setting for the next time
+    if(localStorage.getItem('userdata') !=null){
+      this.username = JSON.parse(localStorage.getItem('userdata')).user.username;
+      this.email = JSON.parse(localStorage.getItem('userdata')).user.email;
+    }
+  }
+
+  openPage(page){
+    this.nav.setRoot(page.component);
+  }
+  
+  logOut(){
+    localStorage.removeItem('userdata');
+    this.nav.setRoot(WelcomePage);
   }
 }

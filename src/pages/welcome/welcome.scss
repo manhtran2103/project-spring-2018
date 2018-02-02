@@ -1,0 +1,29 @@
+#welcome {
+    background-color: color($colors, primary);
+}
+.content{
+    text-align: center;
+}
+.logo{
+    display: block;
+    margin: auto;
+    width: auto;
+    height: 180px;
+}
+h2{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 26px;
+    margin-top: 20px;
+}
+h4{
+    text-align: center;
+    font-size: 18px;
+    color: rgb(201, 159, 97);
+    font-style: italic;
+}
+.signin-btn{
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
