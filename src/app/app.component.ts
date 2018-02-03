@@ -7,6 +7,10 @@ import { PeoplePage } from '../pages/people/people';
 import {Storage} from '@ionic/storage';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { Events } from 'ionic-angular';
+import { AboutPage } from '../pages/about/about';
+import { SettingsPage } from '../pages/settings/settings';
+import { FavouritePage } from '../pages/favourite/favourite';
+import { YourImagesPage } from '../pages/your-images/your-images';
 @Component({
   templateUrl: 'app.html'
 })
@@ -15,7 +19,7 @@ import { Events } from 'ionic-angular';
 export class MyApp {
   rootPage:any = HomePage;
   @ViewChild(Nav) nav: Nav;
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, name:string}>;
   username = 'Username';
   email = 'Email';
   constructor(platform: Platform, 
@@ -28,8 +32,13 @@ export class MyApp {
       splashScreen.hide();
     });
     this.pages = [
-      {title: 'Home', component: HomePage},
-      {title: 'People', component: PeoplePage}
+      {title: 'Home', component: HomePage, name: 'home'},
+      {title: 'Your Images', component: YourImagesPage, name: 'images'},
+      {title: 'Favourite', component: FavouritePage, name: 'star'},
+      {title: 'People', component: PeoplePage, name: 'people'},
+      {title: 'About', component: AboutPage, name: 'contacts'},
+      {title: 'Settings', component: SettingsPage, name: 'settings'}
+
     ];
 
     //setting for the first login

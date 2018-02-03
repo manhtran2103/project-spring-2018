@@ -18,6 +18,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DataProvider } from '../providers/data/data';
 import { PeoplePage } from '../pages/people/people';
+import { FavouritePage } from '../pages/favourite/favourite';
+import { SettingsPage } from '../pages/settings/settings';
+import { YourImagesPage } from '../pages/your-images/your-images';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { PeoplePage } from '../pages/people/people';
     WelcomePage,
     LoginPage,
     SignupPage,
-    PeoplePage
+    PeoplePage,
+    FavouritePage,
+    SettingsPage,
+    YourImagesPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,10 @@ import { PeoplePage } from '../pages/people/people';
     WelcomePage,
     LoginPage,
     SignupPage,
-    PeoplePage
+    PeoplePage,
+    FavouritePage,
+    SettingsPage,
+    YourImagesPage
   ],
   providers: [
     StatusBar,
