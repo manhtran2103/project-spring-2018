@@ -21,7 +21,7 @@ import { PeoplePage } from '../pages/people/people';
 import { FavouritePage } from '../pages/favourite/favourite';
 import { SettingsPage } from '../pages/settings/settings';
 import { YourImagesPage } from '../pages/your-images/your-images';
-
+import {MomentModule} from 'angular2-moment';
 @NgModule({
   declarations: [
     MyApp,
@@ -41,6 +41,7 @@ import { YourImagesPage } from '../pages/your-images/your-images';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    MomentModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],

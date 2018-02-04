@@ -10,7 +10,7 @@ import {Storage} from '@ionic/storage';
 @IonicPage()
 @Component({
   selector: 'page-welcome',
-  templateUrl: 'welcome.html',
+  templateUrl: 'welcome.html'
 })
 export class WelcomePage {
 

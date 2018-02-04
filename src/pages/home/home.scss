@@ -1,3 +1,10 @@
-page-home {
-
+ion-card-content{
+    text-align: left;
 }
+ .like, .comment, .rate{
+     font-size: 12px;
+ }
+ .comment-username{
+
+     color: color($colors, primary);
+ }
