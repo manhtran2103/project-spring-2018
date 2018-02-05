@@ -22,8 +22,8 @@ export class CommentPage {
     public viewCtrl: ViewController, 
     public dataProvider: DataProvider) {
 
-    this.file_id = navParams.get('file_id');
-    console.log('file_id', navParams.get('file_id'));
+    this.file_id = navParams.get('media').file_id;
+    console.log(this.file_id);
     this.user_id = JSON.parse(localStorage.getItem('userdata')).user.user_id;
     this.username = JSON.parse(localStorage.getItem('userdata')).user.username;
   }

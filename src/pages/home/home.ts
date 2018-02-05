@@ -18,7 +18,7 @@ export class HomePage {
   // display_comment_list = false;
   file_id;
   listMedia_i;
-  like_list:any;
+  like_list:Array<any>;
   constructor(
     public navCtrl: NavController, 
     public storage: Storage, 
@@ -55,14 +55,15 @@ export class HomePage {
   }
 
  
-  presentCommentModel(file_id) {
-    let commentModal = this.modalCtrl.create(CommentPage, { file_id: file_id });
+  presentCommentModel(media) {
+    console.log(media);
+    let commentModal = this.modalCtrl.create(CommentPage, { media: media });
     commentModal.onDidDismiss(data => {
       if(data['liked'] == true){
-        
+        media.like_number++;
         console.log('liked');
       } else{
-
+        media.like_number--;
       }
     });
     commentModal.present();
