@@ -10,7 +10,7 @@ import { DataProvider } from '../../providers/data/data';
 })
 export class CommentPage {
   file_id;
-  like_list:Array<{favourite_id:string, file_id:string, user_id:string, username:string}>;
+  like_list:any;
   user_id;
   username;
   like_color = 'dark';

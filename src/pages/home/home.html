@@ -19,7 +19,15 @@
                 {{media.time_added | amTimeAgo}}
               </ion-note> 
             </ion-item>
-            <img [src]="media.url">
+            <img [src]="media.url" *ngIf="media.media_type=='image'?true:false">
+            <audio controls *ngIf="media.media_type=='audio'?true:false">
+              <source [src]="media.url" type="audio/mpeg">
+              Your device does not support the audio tag.
+            </audio>
+            <video width="320" height="240" controls *ngIf="media.media_type=='video'?true:false">
+              <source [src]="media.url" type="video/mp4">
+              Your device does not support the video tag.
+            </video>
             <ion-card-content>
               <p>{{media.title}}</p>
               <p>{{media.description}}</p>
