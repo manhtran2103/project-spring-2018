@@ -27,6 +27,7 @@ export class DataProvider {
     return this.http.get(this.baseUrl+'users/'+id, {headers: headers});
   }
 
+  // favourite data
   getFavouritesInfo(id){
     return this.http.get(this.baseUrl+'favourites/file/'+id);
   }
@@ -42,5 +43,10 @@ export class DataProvider {
     const headers = new HttpHeaders()
     .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
     return this.http.delete(this.baseUrl+'favourites/file/' + file_id, {headers:headers});
+  }
+
+  // comments data
+  getCommentsInfo(id){
+    return this.http.get(this.baseUrl+'comments/file/'+id);
   }
 }

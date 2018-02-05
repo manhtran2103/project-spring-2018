@@ -2,7 +2,7 @@
   <div>  
     <ion-segment [(ngModel)]="function">
       <ion-icon name="arrow-back" (click)="dismiss()"></ion-icon>
-      <ion-segment-button value="favourite" (click)="showFavourite()">
+      <ion-segment-button value="favourite">
         Favourite
       </ion-segment-button>
       <ion-segment-button value="comment">
@@ -23,11 +23,18 @@
         <span>{{like.username}}</span>
       </ion-item>
     </ion-list>
-    <ion-list *ngSwitchCase="'comment'">
-      <ion-item>
-        comment
-      </ion-item>
-    </ion-list>
+    <div *ngSwitchCase="'comment'">
+      <ion-card *ngFor="let comment of comment_list">
+        <ion-card-header class="comment-username">
+          <ion-icon name="contact"></ion-icon>
+          {{comment.username}}
+        </ion-card-header>
+        <ion-card-content>
+          {{comment.comment}}
+        </ion-card-content>
+      </ion-card>
+      <ion-textarea placeholder="Enter your comment" class="comment-input"></ion-textarea>
+    </div>
     <ion-list *ngSwitchCase="'rating'">
       <ion-item>
         rating

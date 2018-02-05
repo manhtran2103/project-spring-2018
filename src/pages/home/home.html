@@ -34,19 +34,19 @@
             </ion-card-content>
             <ion-row>
               <ion-col>
-                <button ion-button icon-left clear small (click)="presentCommentModel(media)">
+                <button ion-button icon-left clear small (click)="presentCommentModel(media, 'favourite')">
                   <ion-icon name="thumbs-up"></ion-icon>
                   <div class="like">{{media.like_number}}</div>
                 </button>
               </ion-col>
               <ion-col>
-                <button ion-button icon-left clear small>
+                <button ion-button icon-left clear small (click)="presentCommentModel(media, 'comment')">
                   <ion-icon name="text"></ion-icon>
-                  <div class="comment">4</div>
+                  <div class="comment">{{media.comment_number}}</div>
                 </button>
               </ion-col>
               <ion-col>
-                <button ion-button icon-left clear small>
+                <button ion-button icon-left clear small (click)="presentCommentModel(media, 'rating')">
                   <ion-icon name="star"></ion-icon>
                   <div class="rate">4</div>
                 </button>
@@ -54,29 +54,5 @@
             </ion-row>
           </ion-card>
     </div>
-    <!-- <div *ngIf="display_like_list">
-        <ion-icon name="arrow-back" (click)="back_like()" icon-left></ion-icon>
-       <ion-list>
-            <ion-item>
-              <ion-icon name="thumbs-up" (click)="createLike(file_id)"></ion-icon>
-            </ion-item>
-             <ion-item *ngFor="let like of like_list" >
-               <ion-icon name="contact"></ion-icon>
-               <span class="comment-username">{{like.username}}</span>
-             </ion-item>
-       </ion-list>
-    </div>  -->
-    <!-- <div *ngIf="display_comment_list">
-        <ion-list>
-            <ion-item>
-              <ion-icon name="contact"></ion-icon>
-              <span class="comment-username">Username</span>
-              <p>content</p>
-            </ion-item>
-            <ion-item>
-              <ion-textarea placeholder="Write your comment"></ion-textarea>
-            </ion-item>
-          </ion-list>
-    </div>  -->
   </ion-content>
   

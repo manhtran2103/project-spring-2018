@@ -16,9 +16,6 @@ export class HomePage {
   // display = true; 
   // display_like_list = false;
   // display_comment_list = false;
-  file_id;
-  listMedia_i;
-  like_list:Array<any>;
   constructor(
     public navCtrl: NavController, 
     public storage: Storage, 
@@ -41,11 +38,10 @@ export class HomePage {
           this.dataProvider.getFavouritesInfo(media.file_id).subscribe(data => {
             media.favourites_info = data;
             media.like_number =  media.favourites_info.length;
-            // media.favourites_info.map(favourite => {
-            //   this.dataProvider.getUserInfo(favourite.user_id).subscribe(data => {
-            //     favourite.username = data['username'];
-            //   });
-            // });
+          });
+          this.dataProvider.getCommentsInfo(media.file_id).subscribe(data => {
+            media.comments_info = data;
+            media.comment_number =  media.comments_info.length;
           });
         });
        console.log(this.listMedia);
@@ -54,17 +50,11 @@ export class HomePage {
 
   }
 
- 
-  presentCommentModel(media) {
+  presentCommentModel(media, type) {
     console.log(media);
-    let commentModal = this.modalCtrl.create(CommentPage, { media: media });
+    let commentModal = this.modalCtrl.create(CommentPage, { media: media, type: type});
     commentModal.onDidDismiss(data => {
-      if(data['liked'] == true){
-        media.like_number++;
-        console.log('liked');
-      } else{
-        media.like_number--;
-      }
+     media.like_number = data['like_number'];
     });
     commentModal.present();
   }

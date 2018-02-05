@@ -14,8 +14,12 @@ export class CommentPage {
   user_id;
   username;
   like_color = 'dark';
-  liked;
+  liked = false;
+  like_number;
   i;
+  function:string;
+  // variable for comment task
+  comment_list:any;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -24,18 +28,22 @@ export class CommentPage {
 
     this.file_id = navParams.get('media').file_id;
     console.log(this.file_id);
+    
     this.user_id = JSON.parse(localStorage.getItem('userdata')).user.user_id;
     this.username = JSON.parse(localStorage.getItem('userdata')).user.username;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommentPage');
+    this.showFavourite();
+    this.showComment();
+    this.function = this.navParams.get('type');
     
   }
 
   // back to previous page and send back some data
   dismiss() {
-    let data = { 'liked': this.liked };
+    let data = { 'like_number': this.like_number };
     this.viewCtrl.dismiss(data);
   }
 
@@ -48,7 +56,7 @@ export class CommentPage {
         });
       });
       // check favoutite status
-      this.liked = false;
+      //this.liked = false;
       for(let i=0; i<this.like_list.length; i++){
         if(this.user_id == this.like_list[i].user_id){
           this.liked = true; 
@@ -56,8 +64,21 @@ export class CommentPage {
           this.i = i;
          }
        }
+     // setting like-number back to homepage
+     this.like_number = this.like_list.length;
     });
    
+  }
+
+  showComment(){
+    this.dataProvider.getCommentsInfo(this.file_id).subscribe(data => {
+      this.comment_list = data;
+      this.comment_list.map(comment => {
+        this.dataProvider.getUserInfo(comment.user_id).subscribe(data => {
+          comment.username = data['username'];
+        });
+      });
+    });
   }
 
   // create favourite 
@@ -67,15 +88,19 @@ export class CommentPage {
         this.like_color = 'dark';
         this.like_list.splice(this.i, 1);
         this.liked = false;
+        // setting like-number back to homepage
+        this.like_number = this.like_list.length;
       });
     } else{
       this.dataProvider.createFavourite(this.file_id).subscribe(data => {
         this.like_color = 'primary';
         this.like_list.unshift({username: this.username});
         this.liked = true;
+        // setting like-number back to homepage
+        this.like_number = this.like_list.length;
       });
     }
-   
+  
   }
  
 
