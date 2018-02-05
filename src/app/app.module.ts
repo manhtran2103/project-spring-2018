@@ -22,6 +22,7 @@ import { FavouritePage } from '../pages/favourite/favourite';
 import { SettingsPage } from '../pages/settings/settings';
 import { YourImagesPage } from '../pages/your-images/your-images';
 import {MomentModule} from 'angular2-moment';
+import { CommentPage } from '../pages/comment/comment';
 @NgModule({
   declarations: [
     MyApp,
@@ -35,7 +36,8 @@ import {MomentModule} from 'angular2-moment';
     PeoplePage,
     FavouritePage,
     SettingsPage,
-    YourImagesPage
+    YourImagesPage,
+    CommentPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ import {MomentModule} from 'angular2-moment';
     PeoplePage,
     FavouritePage,
     SettingsPage,
-    YourImagesPage
+    YourImagesPage,
+    CommentPage
   ],
   providers: [
     StatusBar,
