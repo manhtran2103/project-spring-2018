@@ -49,4 +49,17 @@ export class DataProvider {
   getCommentsInfo(id){
     return this.http.get(this.baseUrl+'comments/file/'+id);
   }
+
+  postComment(file_id, comment){
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.post(this.baseUrl+'comments', {file_id: file_id, comment: comment}, {headers:headers});
+  }
+
+  deleteComment(id){
+    const headers = new HttpHeaders()
+    .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.delete(this.baseUrl+'comments/'+id, {headers:headers});
+  }
 }

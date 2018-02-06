@@ -8,3 +8,21 @@ page-comment {
 .comment-username{
     text-align: left;
 }
+
+.comment-input{
+    text-align: left;
+    border: 0.1px solid rgb(212, 211, 211);
+}
+
+.comment-send{
+    color: white;
+    background-color: rgb(59, 146, 59);
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: right;
+}
+.comment-trash{
+    float: right;
+    margin-bottom: 5px;
+}

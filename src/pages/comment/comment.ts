@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
+
 
 
 @IonicPage()
@@ -20,11 +21,13 @@ export class CommentPage {
   function:string;
   // variable for comment task
   comment_list:any;
+  comment = '';
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public viewCtrl: ViewController, 
-    public dataProvider: DataProvider) {
+    public dataProvider: DataProvider,
+    public alertCtrl: AlertController) {
 
     this.file_id = navParams.get('media').file_id;
     console.log(this.file_id);
@@ -102,6 +105,38 @@ export class CommentPage {
     }
   
   }
+
+  // create a comment
+  createComment(){
+    if(!this.comment.trim()){
+      this.showAlert_comment();
+    } else{
+      this.dataProvider.postComment(this.file_id, this.comment).subscribe(data => {
+        this.comment_list.push({username: this.username, comment: this.comment, user_id: this.user_id});
+        this.comment = '';
+      });
+    }
+
+  }
+
+  //delete comment 
+  deleteComment(comment_id){
+    this.dataProvider.deleteComment(comment_id).subscribe(data => {
+      for(let i=0; i<this.comment_list.length; i++){
+        if(comment_id == this.comment_list[i].comment_id){
+          this.comment_list.splice(i, 1);
+        }
+      }
+    });
+  }
  
+  showAlert_comment() {
+    let alert = this.alertCtrl.create({
+      title: 'Empty comment',
+      subTitle: 'Please enter your comment',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
 }

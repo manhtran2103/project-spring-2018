@@ -22,7 +22,7 @@ export class LoginPage {
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public dataProvider: DataProvider,
-  public events: Events) {
+    public events: Events) {
   }
 
   ionViewDidLoad() {

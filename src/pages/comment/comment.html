@@ -32,8 +32,22 @@
         <ion-card-content>
           {{comment.comment}}
         </ion-card-content>
+        <ion-icon name="trash" 
+        class="comment-trash" 
+        (click)="deleteComment(comment.comment_id)" 
+        *ngIf="comment.user_id==user_id ? true:false">
+        </ion-icon>
       </ion-card>
-      <ion-textarea placeholder="Enter your comment" class="comment-input"></ion-textarea>
+      <ion-card>
+        <ion-card-header>
+          Comment
+        </ion-card-header>
+        <ion-card-content>
+          <ion-textarea placeholder="Enter your comment" class="comment-input" name="comment" [(ngModel)]="comment">
+          </ion-textarea>
+          <button class="comment-send" (click)="createComment()">Send</button>
+        </ion-card-content>
+      </ion-card>
     </div>
     <ion-list *ngSwitchCase="'rating'">
       <ion-item>
