@@ -23,6 +23,7 @@ export class CommentPage {
   // variables for comment task
   comment_list:any;
   comment = '';
+  comment_number;
   //varibales for rating task
   rating_list:any;
   myRating;
@@ -52,7 +53,11 @@ export class CommentPage {
 
   // back to previous page and send back some data
   dismiss() {
-    let data = { 'like_number': this.like_number };
+    this.like_number = this.like_list.length;
+    this.comment_number = this.comment_list.length;
+    let data = { 
+      'like_number': this.like_number, 
+      'comment_number': this.comment_number };
     this.viewCtrl.dismiss(data);
     
   }
@@ -76,7 +81,7 @@ export class CommentPage {
          }
        }
      // setting like-number back to homepage
-     this.like_number = this.like_list.length;
+    //  this.like_number = this.like_list.length;
     });
    
   }
@@ -85,12 +90,14 @@ export class CommentPage {
   showComment(){
     this.dataProvider.getCommentsInfo(this.file_id).subscribe(data => {
       this.comment_list = data;
+      // this.comment_number = this.comment_list.length;
       this.comment_list.map(comment => {
         this.dataProvider.getUserInfo(comment.user_id).subscribe(data => {
           comment.username = data['username'];
         });
       });
     });
+   
   }
 
   // show rating
@@ -113,7 +120,7 @@ export class CommentPage {
         this.like_list.splice(this.i, 1);
         this.liked = false;
         // setting like-number back to homepage
-        this.like_number = this.like_list.length;
+        // this.like_number = this.like_list.length;
       });
     } else{
       this.dataProvider.createFavourite(this.file_id).subscribe(data => {
@@ -121,7 +128,7 @@ export class CommentPage {
         this.like_list.unshift({username: this.username});
         this.liked = true;
         // setting like-number back to homepage
-        this.like_number = this.like_list.length;
+        // this.like_number = this.like_list.length;
       });
     }
   

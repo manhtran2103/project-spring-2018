@@ -15,11 +15,15 @@ export class DataProvider {
   }
 
   getAllMedia(){
-    return this.http.get(this.baseUrl+'media');
+    return this.http.get(this.baseUrl+'media?start=0&limit=10');
   }
 
   getNumberOfMedia(){
     return this.http.get(this.baseUrl +'media/all');
+  }
+
+  getSomeMedia(start, limit){
+    return this.http.get(this.baseUrl + `media?start=${start}&limit=${limit}`);
   }
 
   getUserInfo(id){
