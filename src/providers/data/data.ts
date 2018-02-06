@@ -62,4 +62,20 @@ export class DataProvider {
     .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
     return this.http.delete(this.baseUrl+'comments/'+id, {headers:headers});
   }
+
+  //rating data
+  getRatingsInfo(id){
+    return this.http.get(this.baseUrl+'ratings/file/'+id);
+  }
+  postRating(file_id, rating){
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.post(this.baseUrl+'ratings', {file_id: file_id, rating: rating}, {headers:headers});
+  }
+  deleteRating(file_id){
+    const headers = new HttpHeaders()
+    .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.delete(this.baseUrl+'ratings/file/'+file_id, {headers:headers});
+  }
 }

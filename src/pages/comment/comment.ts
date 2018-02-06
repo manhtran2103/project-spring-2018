@@ -19,9 +19,13 @@ export class CommentPage {
   like_number;
   i;
   function:string;
-  // variable for comment task
+  // variables for comment task
   comment_list:any;
   comment = '';
+  //varibales for rating task
+  rating_list:any;
+  myRating;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -40,6 +44,7 @@ export class CommentPage {
     console.log('ionViewDidLoad CommentPage');
     this.showFavourite();
     this.showComment();
+    this.showRating();
     this.function = this.navParams.get('type');
     
   }
@@ -50,6 +55,7 @@ export class CommentPage {
     this.viewCtrl.dismiss(data);
   }
 
+  //show favourite
   showFavourite(){
     this.dataProvider.getFavouritesInfo(this.file_id).subscribe(data => {
       this.like_list = data;
@@ -73,6 +79,7 @@ export class CommentPage {
    
   }
 
+  // show comment
   showComment(){
     this.dataProvider.getCommentsInfo(this.file_id).subscribe(data => {
       this.comment_list = data;
@@ -81,6 +88,18 @@ export class CommentPage {
           comment.username = data['username'];
         });
       });
+    });
+  }
+
+  // show rating
+  showRating(){
+    this.dataProvider.getRatingsInfo(this.file_id).subscribe(data => {
+        this.rating_list = data;
+        this.rating_list.map(rating => {
+          this.dataProvider.getUserInfo(rating.user_id).subscribe(data => {
+            rating.username = data['username'];
+          });
+        });
     });
   }
 
@@ -129,7 +148,7 @@ export class CommentPage {
       }
     });
   }
- 
+ // show alert comment
   showAlert_comment() {
     let alert = this.alertCtrl.create({
       title: 'Empty comment',
@@ -137,6 +156,24 @@ export class CommentPage {
       buttons: ['OK']
     });
     alert.present();
+  }
+  // show alert rating
+  showAlert_rating() {
+    let alert = this.alertCtrl.create({
+      title: 'Empty Rate',
+      subTitle: 'Please enter your rating',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  // create Rating
+  createRating(){
+    if(this.myRating == null){
+      this.showAlert_rating();
+    } else{
+      console.log(this.myRating);
+    }
   }
 
 }

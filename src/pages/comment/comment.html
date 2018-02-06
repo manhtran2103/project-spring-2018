@@ -53,9 +53,35 @@
       </ion-card>
     </div>
     <ion-list *ngSwitchCase="'rating'">
-      <ion-item>
-        rating
-      </ion-item>
+     <ion-card *ngFor="let rating of rating_list">
+       <ion-card-header class="rating-username">
+        <ion-icon name="contact"></ion-icon>
+        {{rating.username}}
+       </ion-card-header>
+       <ion-card-content>
+         <span *ngFor="let i of [1,2,3,4,5]">
+            <ion-icon name="star" *ngIf="i > rating.rating ? false:true"></ion-icon>
+         </span>
+       </ion-card-content>
+       <ion-icon name="trash" 
+       class="comment-trash" 
+       *ngIf="rating.user_id == user_id ? true:false"
+       (click)="deleteRating(rating.file_id)" >
+       </ion-icon>
+     </ion-card>
+     <ion-card>
+       <ion-card-header>
+         Rating
+       </ion-card-header>
+       <form (submit)="createRating()">
+         <input type="radio" value="1" name="myRating" [(ngModel)]="myRating"> 1 <br>
+         <input type="radio" value="2" name="myRating" [(ngModel)]="myRating"> 2 <br>
+         <input type="radio" value="3" name="myRating" [(ngModel)]="myRating"> 3 <br>
+         <input type="radio" value="4" name="myRating" [(ngModel)]="myRating"> 4 <br>
+         <input type="radio" value="5" name="myRating" [(ngModel)]="myRating"> 5 <br><br>
+         <button type="submit" class="rating-submit">Submit</button>
+       </form>
+     </ion-card>
     </ion-list>
   </div>
 </ion-content>
