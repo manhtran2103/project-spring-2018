@@ -32,6 +32,9 @@
         <ion-card-content>
           {{comment.comment}}
         </ion-card-content>
+        <ion-note class="comment-createdTime">
+          {{comment.time_added | amTimeAgo}}
+        </ion-note>
         <ion-icon name="trash" 
         class="comment-trash" 
         (click)="deleteComment(comment.comment_id)" 
