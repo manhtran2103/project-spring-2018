@@ -187,7 +187,8 @@ export class CommentPage {
         this.rating_list.push({
           rating:this.myRating, 
           username: this.username, 
-          file_id: this.file_id});
+          file_id: this.file_id,
+          user_id: this.user_id});
       }, (err: HttpErrorResponse) => {
           console.log(err);
           if(err.error.reason.includes('Duplicate')){
@@ -199,7 +200,15 @@ export class CommentPage {
 
   // delete rate
   deleteRating(){
-
+    this.dataProvider.deleteRating(this.file_id).subscribe(data => {
+      for(let i=0; i<this.rating_list.length; i++){
+        if(this.user_id == this.rating_list[i].user_id){
+          this.rating_list.splice(i, 1);
+        }
+      }
+    }, (err: HttpErrorResponse) => {
+      console.log(err);
+    });
   }
 
 }
