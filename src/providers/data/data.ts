@@ -67,7 +67,7 @@ export class DataProvider {
   getRatingsInfo(id){
     return this.http.get(this.baseUrl+'ratings/file/'+id);
   }
-  postRating(file_id, rating){
+  createRating(file_id, rating){
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json')
     .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
+import { HttpErrorResponse } from '@angular/common/http/src/response';
 
 
 
@@ -53,6 +54,7 @@ export class CommentPage {
   dismiss() {
     let data = { 'like_number': this.like_number };
     this.viewCtrl.dismiss(data);
+    
   }
 
   //show favourite
@@ -166,14 +168,38 @@ export class CommentPage {
     });
     alert.present();
   }
+  // show alert rating - (rating already)
+  showAlert_rating_already() {
+    let alert = this.alertCtrl.create({
+      title: 'Thank you',
+      subTitle: 'You rated already',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
   // create Rating
   createRating(){
     if(this.myRating == null){
       this.showAlert_rating();
     } else{
-      console.log(this.myRating);
+      this.dataProvider.createRating(this.file_id, this.myRating).subscribe(data=> {
+        this.rating_list.push({
+          rating:this.myRating, 
+          username: this.username, 
+          file_id: this.file_id});
+      }, (err: HttpErrorResponse) => {
+          console.log(err);
+          if(err.error.reason.includes('Duplicate')){
+            this.showAlert_rating_already();
+          }
+      });
     }
+  }
+
+  // delete rate
+  deleteRating(){
+
   }
 
 }
