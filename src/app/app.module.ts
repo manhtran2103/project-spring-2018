@@ -23,6 +23,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { YourImagesPage } from '../pages/your-images/your-images';
 import {MomentModule} from 'angular2-moment';
 import { CommentPage } from '../pages/comment/comment';
+import { SearchPage } from '../pages/search/search';
 @NgModule({
   declarations: [
     MyApp,
@@ -37,7 +38,8 @@ import { CommentPage } from '../pages/comment/comment';
     FavouritePage,
     SettingsPage,
     YourImagesPage,
-    CommentPage
+    CommentPage,
+    SearchPage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import { CommentPage } from '../pages/comment/comment';
     FavouritePage,
     SettingsPage,
     YourImagesPage,
-    CommentPage
+    CommentPage,
+    SearchPage
   ],
   providers: [
     StatusBar,

@@ -3,12 +3,13 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Home
+        <ion-icon name="search" class="icon-search" (click)="presentSearchModel()"></ion-icon>
+    </ion-title>
   </ion-navbar>
 </ion-header>
   
   <ion-content padding>
-    <div>
         <ion-card *ngFor="let media of listMedia" >
             <ion-item>
               <ion-avatar item-start>
@@ -55,7 +56,9 @@
           </ion-card>
           <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
             <ion-infinite-scroll-content *ngIf="moreData"></ion-infinite-scroll-content>
+           
           </ion-infinite-scroll>
-    </div>
+         
+  
   </ion-content>
   

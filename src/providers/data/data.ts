@@ -82,4 +82,12 @@ export class DataProvider {
     .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
     return this.http.delete(this.baseUrl+'ratings/file/'+file_id, {headers:headers});
   }
+
+  // search media
+  searchMedia(name){
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.post(this.baseUrl+'media/search', {title: name}, {headers: headers});
+  }
 }

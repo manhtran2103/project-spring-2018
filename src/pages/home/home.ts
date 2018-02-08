@@ -5,6 +5,7 @@ import { WelcomePage } from '../welcome/welcome';
 import { DataProvider } from '../../providers/data/data';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommentPage } from '../comment/comment';
+import { SearchPage } from '../search/search';
 
 
 @Component({
@@ -65,19 +66,29 @@ export class HomePage {
 
   }
 
+  // comment Model
   presentCommentModel(media, type) {
     console.log(media);
     let commentModal = this.modalCtrl.create(CommentPage, { media: media, type: type});
     commentModal.onDidDismiss(data => {
-     media.like_number = data['like_number'];
-     media.comment_number = data['comment_number'];
+     if(data){
+      media.like_number = data['like_number'];
+      media.comment_number = data['comment_number'];
+     }
     });
     commentModal.present();
   }
 
+  // search Model
+  presentSearchModel() {
+    let commentModal = this.modalCtrl.create(SearchPage);
+    commentModal.present();
+  }
+
+  // loading more media
   doInfinite(infiniteScroll){
     setTimeout(() => {
-      this.dataProvider.getSomeMedia(this.listMedia.length, 3).subscribe(data => {
+      this.dataProvider.getSomeMedia(this.listMedia.length, 5).subscribe(data => {
         this.listMedia_more = data;
         this.listMedia_more.map(media => {
           media.url = this.dataProvider.baseUrl+'uploads/' + media.filename;
@@ -102,7 +113,7 @@ export class HomePage {
             media.rate = (isNaN(avrRate) ? '' : avrRate);
           });
         });
-        for(let i=0; i < 3; i++){
+        for(let i=0; i < 5; i++){
           this.listMedia.push(this.listMedia_more[i]);
           if(this.listMedia.length == this.totalMedia){
             this.moreData = false;
@@ -115,6 +126,7 @@ export class HomePage {
     }, 200);
   }
 
+  // toast for no more data
   presentToast_NoMoreData() {
     let toast = this.toastCtrl.create({
       message: 'No more data',
