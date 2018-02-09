@@ -49,7 +49,7 @@ export class SearchPage {
       });
       console.log(this.listMedia);
       if(this.listMedia.length == 0){
-       this.listMedia[0]= {title: 'No Item Found'};
+       this.listMedia[0]= {title: 'No Media Found'};
       }
     }); 
    }

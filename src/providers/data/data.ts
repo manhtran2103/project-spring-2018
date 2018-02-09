@@ -90,4 +90,10 @@ export class DataProvider {
     .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
     return this.http.post(this.baseUrl+'media/search', {title: name}, {headers: headers});
   }
+  // get your media
+  getYourMedia(){
+    const headers = new HttpHeaders()
+    .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.get(this.baseUrl + 'media/user', {headers: headers});
+  }
 }

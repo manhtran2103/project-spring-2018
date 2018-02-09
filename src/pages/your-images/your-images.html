@@ -9,5 +9,48 @@
     
 
 <ion-content padding>
-
+  <ion-card *ngFor="let media of listMedia" >
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../assets/imgs/user.png">
+      </ion-avatar>
+      <h2>{{media.username}}</h2>
+      <ion-note>
+        {{media.time_added | amTimeAgo}}
+      </ion-note> 
+    </ion-item>
+    <img [src]="media.url" *ngIf="media.media_type=='image'?true:false">
+    <audio controls *ngIf="media.media_type=='audio'?true:false">
+      <source [src]="media.url" type="audio/mpeg">
+      Your device does not support the audio tag.
+    </audio>
+    <video width="320" height="240" controls *ngIf="media.media_type=='video'?true:false">
+      <source [src]="media.url" type="video/mp4">
+      Your device does not support the video tag.
+    </video>
+    <ion-card-content>
+      <p>{{media.title}}</p>
+      <p>{{media.description}}</p>
+    </ion-card-content>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="presentCommentModel(media, 'favourite')">
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div class="like">{{media.like_number}}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="presentCommentModel(media, 'comment')">
+          <ion-icon name="text"></ion-icon>
+          <div class="comment">{{media.comment_number}}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="presentCommentModel(media, 'rating')">
+          <ion-icon name="star"></ion-icon>
+          <div class="rate">{{media.rate}}</div>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
 </ion-content>
