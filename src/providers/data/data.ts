@@ -113,6 +113,6 @@ export class DataProvider {
   updateMedia(id, data){
     const headers = new HttpHeaders()
     .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
-    return this.http.put(this.baseUrl+'media/'+id, {data}, {headers: headers});
+    return this.http.put(this.baseUrl+'media/'+id, data, {headers: headers});
   }
 }

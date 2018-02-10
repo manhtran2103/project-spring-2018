@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { DataProvider } from '../../providers/data/data';
 
-/**
- * Generated class for the UpdateMediaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -14,12 +9,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'update-media.html',
 })
 export class UpdateMediaPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  title:string;
+  description:string;
+  file_id;
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public viewCtrl: ViewController, 
+    public dataProvider: DataProvider) {
+    this.file_id = navParams.get('id');
+    console.log(this.file_id);
+    this.dataProvider.getAMedia(this.file_id).subscribe(data => {
+      this.title = data['title'];
+      this.description = data['description'];
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UpdateMediaPage');
+  }
+
+  updateInfo(){
+    this.dataProvider
+    .updateMedia(this.file_id,{title: this.title, description: this.description})
+    .subscribe(data => {
+      this.viewCtrl.dismiss({'msg':'updated'});
+    });
+  }
+
+  back(){
+    this.viewCtrl.dismiss();
   }
 
 }

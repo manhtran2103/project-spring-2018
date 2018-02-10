@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ViewController, ModalController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { UpdateMediaPage } from '../update-media/update-media';
+import { YourImagesPage } from '../your-images/your-images';
 
 
 
@@ -12,12 +13,14 @@ import { UpdateMediaPage } from '../update-media/update-media';
 })
 export class PopoverPage {
   file_id;
+  msg_from_update;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public alertCtrl: AlertController, 
     public dataProvider: DataProvider, 
-    public viewCtrl: ViewController) {
+    public viewCtrl: ViewController, 
+    public modalCtrl: ModalController) {
     this.file_id = navParams.get('id');
   }
 
@@ -26,14 +29,13 @@ export class PopoverPage {
   }
 
   updateMedia(){
-    this.navCtrl.push(UpdateMediaPage);
-    this.viewCtrl.dismiss();
+    this.presentCommentModel(this.file_id);
   }
 
   deleteMedia(){
     console.log(this.file_id);
     this.dataProvider.deleteMedia(this.file_id).subscribe(data => {
-      this.viewCtrl.dismiss({msg: 'deleted'});
+      this.viewCtrl.dismiss({'msg': 'deleted'});
     });
   }
 
@@ -57,6 +59,19 @@ export class PopoverPage {
       ]
     });
     confirm.present();
+  }
+
+  // comment Model
+  presentCommentModel(id) {
+    let commentModal = this.modalCtrl.create(UpdateMediaPage, {id: id});
+    commentModal.onDidDismiss(data => {
+      if(data['msg'] == 'updated'){
+        this.viewCtrl.dismiss({'msg':'updated'});
+      } else{
+        this.viewCtrl.dismiss();
+      }
+    });
+    commentModal.present();
   }
 
 }

@@ -12,6 +12,7 @@ import { PopoverPage } from '../popover/popover';
 export class YourImagesPage {
    listMedia:any;
    display_more = false;
+   edit_status = false;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -70,20 +71,23 @@ export class YourImagesPage {
       ev: myEvent
     });
     popover.onDidDismiss(data => {
-      if(data['msg'] == 'deleted'){
-        for(let i=0; i < this.listMedia.length; i++){
-          if(id == this.listMedia[i].file_id){
-            this.listMedia.splice(i, 1);
+      if(data){
+        if(data['msg'] == 'deleted'){
+          for(let i=0; i < this.listMedia.length; i++){
+            if(id == this.listMedia[i].file_id){
+              this.listMedia.splice(i, 1);
+            }
+          }
+        } if(data['msg'] == 'updated'){
+          for(let i=0; i < this.listMedia.length; i++){
+            if(id == this.listMedia[i].file_id){
+              this.dataProvider.getAMedia(id).subscribe(data => {
+                this.listMedia[i]['title'] = data['title'];
+                this.listMedia[i]['description'] = data['description'];
+              });
+            }
           }
         }
-      } else if(data['msg'] == 'updated'){
-        for(let i=0; i < this.listMedia.length; i++){
-          if(id == this.listMedia[i].file_id){
-            this.dataProvider.getAMedia(id).subscribe(data => {
-              this.listMedia[i] = data;
-            });
-          }
-        }  
       }
     });
   }
