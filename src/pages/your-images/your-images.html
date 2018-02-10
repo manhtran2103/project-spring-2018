@@ -17,7 +17,11 @@
       <h2>{{media.username}}</h2>
       <ion-note>
         {{media.time_added | amTimeAgo}}
-      </ion-note> 
+      </ion-note>
+      <button  class="your-media-more" ion-button icon-only (click)="presentPopover($event, media.file_id)" clear>
+        <ion-icon name="more"></ion-icon>
+      </button>
+      <!-- <ion-icon name="more" class="your-media-more" (click)="presentPopover($event)"></ion-icon> -->
     </ion-item>
     <img [src]="media.url" *ngIf="media.media_type=='image'?true:false">
     <audio controls *ngIf="media.media_type=='audio'?true:false">

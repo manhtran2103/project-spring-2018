@@ -24,6 +24,8 @@ import { YourImagesPage } from '../pages/your-images/your-images';
 import {MomentModule} from 'angular2-moment';
 import { CommentPage } from '../pages/comment/comment';
 import { SearchPage } from '../pages/search/search';
+import { PopoverPage } from '../pages/popover/popover';
+import { UpdateMediaPage } from '../pages/update-media/update-media';
 @NgModule({
   declarations: [
     MyApp,
@@ -39,7 +41,9 @@ import { SearchPage } from '../pages/search/search';
     SettingsPage,
     YourImagesPage,
     CommentPage,
-    SearchPage
+    SearchPage,
+    PopoverPage,
+    UpdateMediaPage
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,9 @@ import { SearchPage } from '../pages/search/search';
     SettingsPage,
     YourImagesPage,
     CommentPage,
-    SearchPage
+    SearchPage,
+    PopoverPage, 
+    UpdateMediaPage
   ],
   providers: [
     StatusBar,

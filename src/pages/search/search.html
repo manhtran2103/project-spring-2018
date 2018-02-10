@@ -2,7 +2,7 @@
 <ion-content padding >
     <div class="search-page-top" >
         <ion-icon name="arrow-back" (click)="dismiss()" class="arrow-back-search" ></ion-icon>
-        <ion-searchbar (ionInput)="getMedia($event)" [(ngModel)]="searched_item"></ion-searchbar>
+        <ion-searchbar (ionInput)="getMedia($event)" [(ngModel)]="searched_item" (click)="showSearchedMedia(searched_item)" ></ion-searchbar>
     </div>
     <div *ngIf="!show_result">
       <ion-list *ngFor="let media of listMedia">

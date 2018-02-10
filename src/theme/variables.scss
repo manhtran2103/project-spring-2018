@@ -14,6 +14,8 @@ $colors: (
 $toolbar-background: color($colors, primary);
 $toolbar-md-title-text-color: color($colors,danger);
 
+$popover-md-width: 130px;
+
 @import "ionic.theme.default";
 @import "ionic.ionicons";
 @import "roboto";

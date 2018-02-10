@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, PopoverController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { CommentPage } from '../comment/comment';
-
-/**
- * Generated class for the YourImagesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { PopoverPage } from '../popover/popover';
 
 @IonicPage()
 @Component({
@@ -17,11 +11,13 @@ import { CommentPage } from '../comment/comment';
 })
 export class YourImagesPage {
    listMedia:any;
+   display_more = false;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public dataProvider: DataProvider, 
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    public popoverCtrl: PopoverController) {
   }
 
   ionViewDidLoad() {
@@ -65,6 +61,31 @@ export class YourImagesPage {
      }
     });
     commentModal.present();
+  }
+
+  // show popover
+  presentPopover(myEvent, id) {
+    let popover = this.popoverCtrl.create(PopoverPage, {id: id});
+    popover.present({
+      ev: myEvent
+    });
+    popover.onDidDismiss(data => {
+      if(data['msg'] == 'deleted'){
+        for(let i=0; i < this.listMedia.length; i++){
+          if(id == this.listMedia[i].file_id){
+            this.listMedia.splice(i, 1);
+          }
+        }
+      } else if(data['msg'] == 'updated'){
+        for(let i=0; i < this.listMedia.length; i++){
+          if(id == this.listMedia[i].file_id){
+            this.dataProvider.getAMedia(id).subscribe(data => {
+              this.listMedia[i] = data;
+            });
+          }
+        }  
+      }
+    });
   }
 
 }

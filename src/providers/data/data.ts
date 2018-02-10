@@ -96,4 +96,23 @@ export class DataProvider {
     .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
     return this.http.get(this.baseUrl + 'media/user', {headers: headers});
   }
+
+  // delete media
+  deleteMedia(id){
+    const headers = new HttpHeaders()
+    .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.delete(this.baseUrl + 'media/'+ id, {headers: headers});
+  }
+
+  //get a media
+  getAMedia(id){
+    return this.http.get(this.baseUrl + 'media/' + id);
+  }
+
+  // update media
+  updateMedia(id, data){
+    const headers = new HttpHeaders()
+    .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.put(this.baseUrl+'media/'+id, {data}, {headers: headers});
+  }
 }
