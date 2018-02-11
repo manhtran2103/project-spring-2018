@@ -1,0 +1,21 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Upload</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <label for="file-upload" class="custom-file-upload">
+    <ion-icon name='cloud-upload'></ion-icon>
+  </label>
+  <input id="file-upload" type="file" (change)='getFile($event)'/>
+  <ion-list>
+    <ion-item>
+      <img [src]="src">
+    </ion-item>
+  </ion-list>
+</ion-content>

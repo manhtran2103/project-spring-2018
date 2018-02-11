@@ -26,6 +26,7 @@ import { CommentPage } from '../pages/comment/comment';
 import { SearchPage } from '../pages/search/search';
 import { PopoverPage } from '../pages/popover/popover';
 import { UpdateMediaPage } from '../pages/update-media/update-media';
+import { UploadPage } from '../pages/upload/upload';
 @NgModule({
   declarations: [
     MyApp,
@@ -43,7 +44,8 @@ import { UpdateMediaPage } from '../pages/update-media/update-media';
     CommentPage,
     SearchPage,
     PopoverPage,
-    UpdateMediaPage
+    UpdateMediaPage,
+    UploadPage
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ import { UpdateMediaPage } from '../pages/update-media/update-media';
     CommentPage,
     SearchPage,
     PopoverPage, 
-    UpdateMediaPage
+    UpdateMediaPage,
+    UploadPage
   ],
   providers: [
     StatusBar,

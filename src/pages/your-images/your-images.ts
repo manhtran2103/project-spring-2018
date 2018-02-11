@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, PopoverController
 import { DataProvider } from '../../providers/data/data';
 import { CommentPage } from '../comment/comment';
 import { PopoverPage } from '../popover/popover';
+import { UploadPage } from '../upload/upload';
 
 @IonicPage()
 @Component({
@@ -90,6 +91,10 @@ export class YourImagesPage {
         }
       }
     });
+  }
+
+  upload(){
+    this.navCtrl.push(UploadPage);
   }
 
 }
