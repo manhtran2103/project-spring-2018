@@ -9,9 +9,47 @@ export class DataProvider {
     console.log('Hello DataProvider Provider');
   }
 
+  // login
   get_login_data(credentials){
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post(this.baseUrl+"login",credentials, {headers: headers});
+  }
+
+  // check username
+  checkUserName(username){
+    return this.http.get(this.baseUrl+'users/username/' + username);
+  }
+
+  // register
+  register(credentials){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(this.baseUrl+'users', credentials, {headers: headers});
+  }
+
+  // update User info
+  updateUserInfo(credentials){
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.put(this.baseUrl+'users', credentials, {headers: headers});
+  }
+
+  // get an user info
+  getUserInfo(id){
+    const headers = new HttpHeaders().set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.get(this.baseUrl+'users/'+id, {headers: headers});
+  }
+
+  // get current user info
+  getCurrentUserInfo(){
+    const headers = new HttpHeaders().set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.get(this.baseUrl+'users/user', {headers: headers});
+  }
+
+  // get user list
+  getUserList(){
+    const headers = new HttpHeaders().set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.get(this.baseUrl+'users', {headers: headers});
   }
 
   getAllMedia(){
@@ -26,10 +64,7 @@ export class DataProvider {
     return this.http.get(this.baseUrl + `media?start=${start}&limit=${limit}`);
   }
 
-  getUserInfo(id){
-    const headers = new HttpHeaders().set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
-    return this.http.get(this.baseUrl+'users/'+id, {headers: headers});
-  }
+  
 
   // favourite data
   getFavouritesInfo(id){

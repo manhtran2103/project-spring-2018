@@ -26,6 +26,7 @@ export class YourImagesPage {
     console.log('ionViewDidLoad YourImagesPage');
     this.dataProvider.getYourMedia().subscribe(data => {
       this.listMedia = data;
+      this.listMedia.reverse();
       this.listMedia.map(media => {
         media.url = this.dataProvider.baseUrl+'uploads/' + media.filename;
         this.dataProvider.getUserInfo(media.user_id).subscribe(data => {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DataProvider } from '../../providers/data/data';
 
 
 
@@ -9,12 +10,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'people.html',
 })
 export class PeoplePage {
-  items = [];
-  stop = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    for (var i = 0; i < 20; i++) {
-      this.items.push( this.items.length );
-    }
+  userList:any;
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public dataProvider: DataProvider) {
+    this.dataProvider.getUserList().subscribe(data => {
+      this.userList = data;
+    });
   }
 
   ionViewDidLoad() {
@@ -22,20 +25,5 @@ export class PeoplePage {
   }
 
 
-  doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      for (let i = 0; i < 20; i++) {
-        this.items.push( this.items.length );
-        if(this.items.length == 97){
-         this.stop = false;
-         break;
-        }
-      }
-      console.log('Async operation has ended');
-      infiniteScroll.complete();
-    }, 500);
-  }
 
 }
