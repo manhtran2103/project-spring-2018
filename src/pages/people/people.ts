@@ -24,6 +24,8 @@ export class PeoplePage {
     console.log('ionViewDidLoad PeoplePage');
   }
 
-
+  getMediaOfAUser(user_id){
+    
+  }
 
 }

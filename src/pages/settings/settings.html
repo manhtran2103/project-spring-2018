@@ -9,5 +9,43 @@
     
 
 <ion-content padding>
+  <ion-list *ngIf='!isEdit'>
+    <ion-list-header>
+      Personal Information
+    </ion-list-header>
+    <ion-item>
+      User ID:  {{userInfo.user_id}}
+    </ion-item>
+    <ion-item>
+      User Name: {{userInfo.username}}
+    </ion-item>
+    <ion-item>
+      Email:  {{userInfo.email}}
+    </ion-item>
+    <ion-item>
+        <button ion-button (click)='isEdit = !isEdit'>Edit</button>
+    </ion-item>     
+  </ion-list>
+  
+  <ion-list *ngIf='isEdit'>
+      <ion-list-header>
+        Personal Information
+      </ion-list-header>
+      <ion-item>
+        <ion-label stacked>User Name</ion-label>
+        <ion-input type="text" [(ngModel)]='username'></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Password</ion-label>
+          <ion-input type="password" [(ngModel)]='password'></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked>Email</ion-label>
+          <ion-input type="email" [(ngModel)]='email'></ion-input>
+      </ion-item>
+      <ion-item>
+          <button ion-button (click)='updateInfo()'>Save</button>
+      </ion-item>     
+  </ion-list>  
 
 </ion-content>
