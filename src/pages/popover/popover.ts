@@ -65,7 +65,7 @@ export class PopoverPage {
   presentCommentModel(id) {
     let commentModal = this.modalCtrl.create(UpdateMediaPage, {id: id});
     commentModal.onDidDismiss(data => {
-      if(data['msg'] == 'updated'){
+      if(data){
         this.viewCtrl.dismiss({'msg':'updated'});
       } else{
         this.viewCtrl.dismiss();

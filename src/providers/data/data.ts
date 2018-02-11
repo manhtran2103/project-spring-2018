@@ -115,4 +115,11 @@ export class DataProvider {
     .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
     return this.http.put(this.baseUrl+'media/'+id, data, {headers: headers});
   }
+
+  // upload media
+  uploadMedia(data){
+    const headers = new HttpHeaders()
+    .set('x-access-token', `${JSON.parse(localStorage.getItem('userdata'))['token']}`);
+    return this.http.post(this.baseUrl+'media', data, {headers:headers});
+  }
 }

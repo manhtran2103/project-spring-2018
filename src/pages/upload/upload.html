@@ -1,21 +1,47 @@
 
 <ion-header>
-
   <ion-navbar>
     <ion-title>Upload</ion-title>
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
-  <label for="file-upload" class="custom-file-upload">
-    <ion-icon name='cloud-upload'></ion-icon>
-  </label>
-  <input id="file-upload" type="file" (change)='getFile($event)'/>
-  <ion-list>
-    <ion-item>
-      <img [src]="src">
-    </ion-item>
-  </ion-list>
+  <div *ngIf='photo'>
+    <img [src]="src">
+    <div><ion-note>Photo</ion-note></div>
+  </div>
+    <div *ngIf='audio'>
+      <audio controls>
+          <source [src]="src" type="audio/ogg">
+          <source [src]="src" type="audio/mpeg">
+          <source [src]="src" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+      <div><ion-note>Audio</ion-note></div>
+    </div>
+    <div *ngIf='video'>
+      <video maxWidth="320" maxHeight="240" controls>
+          <ion-note>Video</ion-note>
+          <source [src]="src" type="video/mp4">
+          <source [src]="src" type="video/ogg">
+            <source [src]="src" type="video/webm">  
+          Your browser does not support the video tag.
+      </video> 
+      <div><ion-note>Video</ion-note></div>     
+    </div>
+    <br><br>
+  <div>
+    <label for="file-upload" class="custom-file-upload">
+      <ion-icon name='cloud-upload'></ion-icon>
+    </label>
+    <input id="file-upload" type="file" (change)='getFile($event)'/>      
+  </div>
+  <br>
+ <div>
+    <p class="update-title">Title</p>
+    <ion-input class="update-input-title" type="text" placeholder="Enter a title" [(ngModel)]="title"></ion-input>
+    <p class="update-description">Description</p>
+    <ion-textarea class="update-input-description" placeholder="Enter a description" [(ngModel)]="description"></ion-textarea>
+   <button (click)="upload()" class="update-media-save">Upload</button>
+ </div> 
 </ion-content>
