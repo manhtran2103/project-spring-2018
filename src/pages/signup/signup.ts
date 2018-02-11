@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import { AlertController } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
+import { DataProvider } from '../../providers/data/data';
+import { HttpErrorResponse } from '@angular/common/http';
 @IonicPage()
 @Component({
   selector: 'page-signup',
@@ -16,7 +18,8 @@ export class SignupPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     private alertCtrl: AlertController, 
-    public storage: Storage) {
+    public storage: Storage, 
+    public dataProvider: DataProvider) {
   }
 
   ionViewDidLoad() {
@@ -41,6 +44,14 @@ export class SignupPage {
     }
    if(this.username && this.password && this.email){
     console.log(this.userdata);
+    this.dataProvider.register(this.userdata).subscribe(data => {
+        this.navCtrl.setRoot(LoginPage);
+    }, (err:HttpErrorResponse) => {
+        console.log(err);
+        if(err.error.error.includes('Duplicate')){
+          this.showAlert_username();
+        }
+    });
    } else{
      this.showAlert_signUp();
    }
@@ -50,6 +61,15 @@ export class SignupPage {
     let alert = this.alertCtrl.create({
       title: 'Invalid info',
       subTitle: 'Check your User Name, Password and E-Mail',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  showAlert_username() {
+    let alert = this.alertCtrl.create({
+      title: 'Existed User Name',
+      subTitle: 'Please try another user name!',
       buttons: ['OK']
     });
     alert.present();
