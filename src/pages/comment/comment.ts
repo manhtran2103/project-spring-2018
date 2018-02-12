@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ViewController, AlertController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
+import {MomentModule} from 'angular2-moment';
 
 
 
-@IonicPage()
 @Component({
   selector: 'page-comment',
   templateUrl: 'comment.html',

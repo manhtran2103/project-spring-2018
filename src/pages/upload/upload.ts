@@ -4,7 +4,6 @@ import { DataProvider } from '../../providers/data/data';
 import { YourImagesPage } from '../your-images/your-images';
 
 
-@IonicPage()
 @Component({
   selector: 'page-upload',
   templateUrl: 'upload.html',
@@ -22,7 +21,7 @@ export class UploadPage {
     public navParams: NavParams, 
     public dataProvider: DataProvider, 
     public alertCtrl: AlertController) {
-    this.src = '../../assets/imgs/no-img.png';
+    //this.src = '../../assets/imgs/no-img.png';
   }
 
   ionViewDidLoad() {
@@ -58,7 +57,7 @@ export class UploadPage {
     formData.append('file', this.file);
     formData.append('title', this.title);
     formData.append('description', this.description);
-    if(this.file.name && this.title){
+    if(this.file && this.title){
       this.dataProvider.uploadMedia(formData).subscribe(data => {
         console.log(data);
         this.navCtrl.setRoot(YourImagesPage);

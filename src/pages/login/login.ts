@@ -6,8 +6,9 @@ import {DataProvider} from '../../providers/data/data';
 import {Storage} from '@ionic/storage';
 import {HomePage} from '../home/home';
 import { Events } from 'ionic-angular';
+import { HttpErrorResponse } from '@angular/common/http/src/response';
 
-@IonicPage()
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -42,6 +43,13 @@ export class LoginPage {
         localStorage.setItem('userdata', JSON.stringify(data));
         this.events.publish('logged in', data['user']);
         this.navCtrl.setRoot(HomePage);
+      }, (err: HttpErrorResponse) =>{
+        if(err.error.message.includes('bad username')){
+          this.showAlert_wrongUsername();
+        }
+        if(err.error.message.includes('bad password')){
+          this.showAlert_wrongPassword();
+        }
       });
     } else{
       this.showAlert_logIn();
@@ -56,6 +64,24 @@ export class LoginPage {
     let alert = this.alertCtrl.create({
       title: 'Invalid info',
       subTitle: 'Check your User Name and Password',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  showAlert_wrongUsername() {
+    let alert = this.alertCtrl.create({
+      title: 'Wrong user name',
+      subTitle: 'Check your User Name',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  showAlert_wrongPassword() {
+    let alert = this.alertCtrl.create({
+      title: 'Wrong password',
+      subTitle: 'Check your Password',
       buttons: ['OK']
     });
     alert.present();

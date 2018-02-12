@@ -3,7 +3,7 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-      <ion-title>Your Images <ion-icon class="icon-upload" name='cloud-upload' (click)='upload()'></ion-icon></ion-title>
+      <ion-title>Your Media <ion-icon class="icon-upload" name='cloud-upload' (click)='upload()'></ion-icon></ion-title>
     </ion-navbar>
   </ion-header>
     
@@ -12,7 +12,7 @@
       <ion-card *ngFor="let media of listMedia" >
           <ion-item>
             <ion-avatar item-start>
-              <img src="../../assets/imgs/user.png">
+              <img src="assets/imgs/user.png">
             </ion-avatar>
             <h2>{{media.username}}</h2>
             <ion-note>

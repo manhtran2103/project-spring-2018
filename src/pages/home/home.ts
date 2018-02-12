@@ -38,7 +38,12 @@ export class HomePage {
       this.dataProvider.getAllMedia().subscribe(data => {
         this.listMedia = data;
         this.listMedia.map(media => {
-          media.url = this.dataProvider.baseUrl+'uploads/' + media.filename;
+          //media.url = this.dataProvider.baseUrl+'uploads/' + media.filename;
+          if(media['media_type'] == 'image'){
+            media.url = this.dataProvider.baseUrl+'uploads/' + media.filename.split('.')[0] + '-tn640.png';
+          } else{
+            media.url = this.dataProvider.baseUrl+'uploads/' + media.filename;
+          }
           this.dataProvider.getUserInfo(media.user_id).subscribe(data => {
             media.username = data['username'];
           });
@@ -88,10 +93,14 @@ export class HomePage {
   // loading more media
   doInfinite(infiniteScroll){
     setTimeout(() => {
-      this.dataProvider.getSomeMedia(this.listMedia.length, 5).subscribe(data => {
+      this.dataProvider.getSomeMedia(this.listMedia.length, 3).subscribe(data => {
         this.listMedia_more = data;
         this.listMedia_more.map(media => {
-          media.url = this.dataProvider.baseUrl+'uploads/' + media.filename;
+          if(media['media_type'] == 'image'){
+            media.url = this.dataProvider.baseUrl+'uploads/' + media.filename.split('.')[0] + '-tn640.png';
+          } else{
+            media.url = this.dataProvider.baseUrl+'uploads/' + media.filename;
+          }
           this.dataProvider.getUserInfo(media.user_id).subscribe(data => {
             media.username = data['username'];
           });
@@ -113,7 +122,7 @@ export class HomePage {
             media.rate = (isNaN(avrRate) ? '' : avrRate);
           });
         });
-        for(let i=0; i < 5; i++){
+        for(let i=0; i < 3; i++){
           this.listMedia.push(this.listMedia_more[i]);
           if(this.listMedia.length == this.totalMedia){
             this.moreData = false;

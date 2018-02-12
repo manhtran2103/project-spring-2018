@@ -53,7 +53,7 @@ export class DataProvider {
   }
 
   getAllMedia(){
-    return this.http.get(this.baseUrl+'media?start=0&limit=10');
+    return this.http.get(this.baseUrl+'media?start=0&limit=5');
   }
 
   getNumberOfMedia(){

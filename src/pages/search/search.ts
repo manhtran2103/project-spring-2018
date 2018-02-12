@@ -3,14 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController, ModalController } 
 import { DataProvider } from '../../providers/data/data';
 import { CommentPage } from '../comment/comment';
 
-/**
- * Generated class for the SearchPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
-@IonicPage()
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html',

@@ -1,15 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
+import { WelcomePage } from '../welcome/welcome';
 
-/**
- * Generated class for the SettingsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html',
@@ -24,13 +17,18 @@ export class SettingsPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public dataProvider: DataProvider) {
-    this.dataProvider.getCurrentUserInfo().subscribe(data => {
-      this.userInfo.user_id = data['user_id'];
-      this.userInfo.username = data['username'];
-      this.userInfo.email = data['email'];
-      this.username = this.userInfo.username;
-      this.email = this.userInfo.email;
-    });
+    if(localStorage.getItem('userdata') == null){
+      this.navCtrl.setRoot(WelcomePage);
+    } else{
+      this.dataProvider.getCurrentUserInfo().subscribe(data => {
+        this.userInfo.user_id = data['user_id'];
+        this.userInfo.username = data['username'];
+        this.userInfo.email = data['email'];
+        this.username = this.userInfo.username;
+        this.email = this.userInfo.email;
+      });
+    }
+   
   }
 
   ionViewDidLoad() {

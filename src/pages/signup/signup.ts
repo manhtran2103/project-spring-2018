@@ -5,7 +5,7 @@ import { AlertController } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import { DataProvider } from '../../providers/data/data';
 import { HttpErrorResponse } from '@angular/common/http';
-@IonicPage()
+
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',

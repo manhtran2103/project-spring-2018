@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
+import { WelcomePage } from '../welcome/welcome';
 
 
 
-@IonicPage()
 @Component({
   selector: 'page-people',
   templateUrl: 'people.html',
@@ -15,13 +15,19 @@ export class PeoplePage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public dataProvider: DataProvider) {
-    this.dataProvider.getUserList().subscribe(data => {
-      this.userList = data;
-    });
+    if(localStorage.getItem('userdata') == null){
+      this.navCtrl.setRoot(WelcomePage);
+    } else{
+      this.dataProvider.getUserList().subscribe(data => {
+        this.userList = data;
+      });
+    }
+   
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PeoplePage');
+   
   }
 
   getMediaOfAUser(user_id){

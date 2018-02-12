@@ -33,7 +33,7 @@ export class MyApp {
     });
     this.pages = [
       {title: 'Home', component: HomePage, name: 'home'},
-      {title: 'Your Images', component: YourImagesPage, name: 'images'},
+      {title: 'Your Media', component: YourImagesPage, name: 'images'},
       {title: 'Favourite', component: FavouritePage, name: 'star'},
       {title: 'People', component: PeoplePage, name: 'people'},
       {title: 'About', component: AboutPage, name: 'contacts'},

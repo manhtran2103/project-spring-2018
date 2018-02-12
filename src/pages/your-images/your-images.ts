@@ -4,8 +4,9 @@ import { DataProvider } from '../../providers/data/data';
 import { CommentPage } from '../comment/comment';
 import { PopoverPage } from '../popover/popover';
 import { UploadPage } from '../upload/upload';
+import { WelcomePage } from '../welcome/welcome';
 
-@IonicPage()
+
 @Component({
   selector: 'page-your-images',
   templateUrl: 'your-images.html',
@@ -20,10 +21,13 @@ export class YourImagesPage {
     public dataProvider: DataProvider, 
     public modalCtrl: ModalController,
     public popoverCtrl: PopoverController) {
+    
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad YourImagesPage');
+    if(localStorage.getItem('userdata') == null){
+      this.navCtrl.setRoot(WelcomePage);
+    } else{
     this.dataProvider.getYourMedia().subscribe(data => {
       this.listMedia = data;
       this.listMedia.reverse();
@@ -52,6 +56,7 @@ export class YourImagesPage {
       });
     });
   }
+}
 
    // comment Model
    presentCommentModel(media, type) {

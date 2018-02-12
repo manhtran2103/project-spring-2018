@@ -7,7 +7,6 @@ import {Storage} from '@ionic/storage';
 
 
 
-@IonicPage()
 @Component({
   selector: 'page-welcome',
   templateUrl: 'welcome.html'
@@ -18,18 +17,6 @@ export class WelcomePage {
   public storage: Storage) {
   }
 
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad WelcomePage');
-  //   this.storage.get('userdata').then(val => {
-  //     if(val !=null){
-  //         this.navCtrl.setRoot(HomePage);
-  //         // this.navCtrl.push(HomePage);
-  //     }
-  //   }).catch(err => {
-  //     console.log(err);
-  //   });
-
-  // }
 
   signIn(){
     this.navCtrl.push(LoginPage);

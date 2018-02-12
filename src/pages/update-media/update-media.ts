@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { DataProvider } from '../../providers/data/data';
 
 
-@IonicPage()
 @Component({
   selector: 'page-update-media',
   templateUrl: 'update-media.html',

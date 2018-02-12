@@ -4,9 +4,6 @@ import { DataProvider } from '../../providers/data/data';
 import { UpdateMediaPage } from '../update-media/update-media';
 import { YourImagesPage } from '../your-images/your-images';
 
-
-
-@IonicPage()
 @Component({
   selector: 'page-popover',
   templateUrl: 'popover.html',
