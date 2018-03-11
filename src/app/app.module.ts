@@ -27,6 +27,12 @@ import { SearchPage } from '../pages/search/search';
 import { PopoverPage } from '../pages/popover/popover';
 import { UpdateMediaPage } from '../pages/update-media/update-media';
 import { UploadPage } from '../pages/upload/upload';
+//import { ProvidersEditorProvider } from '../providers/providers-editor/providers-editor';
+import { EditorProvider } from '../providers/editor/editor';
+import {PhotoViewer} from '@ionic-native/photo-viewer';
+import {Camera} from '@ionic-native/camera';
+import {Geolocation} from '@ionic-native/geolocation';
+import {File} from '@ionic-native/file';
 @NgModule({
   declarations: [
     MyApp,
@@ -79,7 +85,12 @@ import { UploadPage } from '../pages/upload/upload';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataProvider
+    DataProvider,
+    EditorProvider,
+    PhotoViewer,
+    Camera,
+    Geolocation,
+    File
   ]
 })
 export class AppModule {}
