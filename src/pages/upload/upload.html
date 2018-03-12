@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content padding>
   <button ion-button (click)="captureImage()">Take photo</button>
-  <button ion-button (click)="upload()" [disabled]="isCanvasEmpty">Upload</button>
+  
   <canvas #myCanvas></canvas>
   <ion-list>
       <ion-item>
@@ -36,7 +36,16 @@
       <ion-label>Grayscale: {{ editorProvider.grayscale}}</ion-label>
       <ion-checkbox item-end [(ngModel)]="editorProvider.grayscale" (ionChange)="editorProvider.applyFilters()"></ion-checkbox>
     </ion-item>
-      <ion-item>
+
+     <div>
+           <p class="update-title">Title</p>
+            <ion-input class="update-input-title" type="text" placeholder="Enter a title" [(ngModel)]="title"></ion-input>
+            <p class="update-description">Description</p>
+            <ion-textarea class="update-input-description" placeholder="Enter a description" [(ngModel)]="description"></ion-textarea>
+    </div> 
+    <br>
+    <button ion-button (click)="upload()" [disabled]="isCanvasEmpty">Upload</button>
+      <!-- <ion-item>
           <ion-label>Red {{editorProvider.redFilter}}</ion-label>
           <ion-range [debounce]="500" min="0" max="255" step="1" [(ngModel)]="editorProvider.redFilter"
                  (ionChange)="editorProvider.applyFilters()">
@@ -67,6 +76,6 @@
             <ion-icon range-left name="color-fill" color="gray"></ion-icon>
             <ion-icon range-right name="color-fill" color="dark"></ion-icon>
           </ion-range>
-      </ion-item>
+      </ion-item> -->
   </ion-list>
 </ion-content>

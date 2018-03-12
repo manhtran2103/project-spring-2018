@@ -14,12 +14,6 @@ import {EditorProvider} from '../../providers/editor/editor';
 import { DataProvider } from '../../providers/data/data';
 import { YourImagesPage } from '../your-images/your-images';
 
-/**
- * Generated class for the UploadPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-upload',
@@ -39,6 +33,8 @@ export class UploadPage {
   loading = this.loadingCtrl.create({
     content: 'Uploading, please wait...',
   });
+  title = 'HC title';
+  description = 'HC description';
 
   constructor(
       public navCtrl: NavController, public navParams: NavParams,
@@ -91,8 +87,8 @@ export class UploadPage {
       let formData = new FormData();
       formData.append('file', blob);
       // add title and description to FormData object
-      formData.append('title', 'HC title');
-      formData.append('description', 'HC description');
+      formData.append('title', this.title);
+      formData.append('description', this.description);
       // send FormData object to API
       this.dataProvider.uploadMedia(formData).
           subscribe(response => {
