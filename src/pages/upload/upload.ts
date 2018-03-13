@@ -1,7 +1,7 @@
 import {Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
 import {
   LoadingController, NavController, NavParams,
-  Platform,
+  Platform,AlertController
 } from 'ionic-angular';
 
 
@@ -35,7 +35,13 @@ export class UploadPage {
   });
   title = 'HC title';
   description = 'HC description';
+  cameraPic=true;
 
+  src;
+  filePic;
+  photo=false;
+  audio=false;
+  video=false;
   constructor(
       public navCtrl: NavController, public navParams: NavParams,
       private camera: Camera,
@@ -43,7 +49,8 @@ export class UploadPage {
       private dataProvider: DataProvider, private geolocation: Geolocation,
       public sanitizer: DomSanitizer, private file: File,
       private platform: Platform,
-      public editorProvider: EditorProvider, private renderer: Renderer2) {
+      public editorProvider: EditorProvider, private renderer: Renderer2,
+      public alertCtrl: AlertController) {
   }
 
   captureImage() {
@@ -123,6 +130,70 @@ export class UploadPage {
     }, 'image/jpeg', 0.5);
 
   }
+
+
+  getFile(e){
+    console.log(e.target.files[0]);
+    this.filePic = e.target.files[0];
+    this.readUrlInput(e.target);
+    if(this.filePic.type == 'video/webm' 
+    || this.filePic.type == 'video/mp4'
+    || this.filePic.type == 'video/ogg'){
+      this.video = true;
+      this.audio = false;
+      this.photo = false;
+    } else if(this.filePic.type == 'audio/mp3' 
+    || this.filePic.type == 'audio/ogg'
+    || this.filePic.type == 'audio/wav'){
+      this.video = false;
+      this.audio = true;
+      this.photo = false;
+    } else{
+      this.video = false;
+      this.audio = false;
+      this.photo = true;
+    }
+
+  }
+
+  uploadFile(){
+    let formData = new FormData();
+    formData.append('file', this.filePic);
+    formData.append('title', this.title);
+    formData.append('description', this.description);
+    if(this.filePic && this.title){
+      this.dataProvider.uploadMedia(formData).subscribe(data => {
+        console.log(data);
+        this.navCtrl.setRoot(YourImagesPage);
+      });
+    } else{
+      this.showAlert();
+    }
+  }
+
+  readUrlInput(input){
+    if (input.files && input.files[0]) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        this.src = e.target['result'];
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+    // let fileList: FileList = event.target['files'];  
+    //   let file1: File = fileList[0];
+    //   console.log(file1);
+  }
+
+  // show alert
+  showAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Invalid Input',
+      subTitle: 'Please check your file and the title',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UploadPage');

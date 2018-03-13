@@ -6,8 +6,10 @@
 
 </ion-header>
 <ion-content padding>
-  <button ion-button (click)="captureImage()">Take photo</button>
-  
+  <!-- <button ion-button (click)="captureImage()">Take photo</button> -->
+<div *ngIf='cameraPic'>
+  <ion-icon class='camera' name='camera' (click)="captureImage()"></ion-icon>
+  <ion-icon name='add-circle' class='file' (click)="cameraPic=!cameraPic"></ion-icon>
   <canvas #myCanvas></canvas>
   <ion-list>
       <ion-item>
@@ -45,6 +47,9 @@
     </div> 
     <br>
     <button ion-button (click)="upload()" [disabled]="isCanvasEmpty">Upload</button>
+    </ion-list>
+  </div>
+  
       <!-- <ion-item>
           <ion-label>Red {{editorProvider.redFilter}}</ion-label>
           <ion-range [debounce]="500" min="0" max="255" step="1" [(ngModel)]="editorProvider.redFilter"
@@ -77,5 +82,46 @@
             <ion-icon range-right name="color-fill" color="dark"></ion-icon>
           </ion-range>
       </ion-item> -->
-  </ion-list>
+      <div *ngIf='!cameraPic'>
+            <ion-icon class='cameraPic' name='camera' (click)="cameraPic=!cameraPic"></ion-icon>
+        <div *ngIf='photo'>
+            <img [src]="src">
+            <div><ion-note>Photo</ion-note></div>
+          </div>
+            <div *ngIf='audio'>
+              <audio controls>
+                  <source [src]="src" type="audio/ogg">
+                  <source [src]="src" type="audio/mpeg">
+                  <source [src]="src" type="audio/wav">
+                Your browser does not support the audio element.
+              </audio>
+              <div><ion-note>Audio</ion-note></div>
+            </div>
+            <div *ngIf='video'>
+              <video maxWidth="320" maxHeight="240" controls>
+                  <ion-note>Video</ion-note>
+                  <source [src]="src" type="video/mp4">
+                  <source [src]="src" type="video/ogg">
+                    <source [src]="src" type="video/webm">  
+                  Your browser does not support the video tag.
+              </video> 
+              <div><ion-note>Video</ion-note></div>     
+            </div>
+            <br><br>
+          <div>
+            <label for="file-upload" class="custom-file-upload">
+              <ion-icon name='cloud-upload'></ion-icon>
+            </label>
+            <input id="file-upload" type="file" (change)='getFile($event)'/>      
+          </div>
+          <br>
+         <div>
+            <p class="update-title">Title</p>
+            <ion-input class="update-input-title" type="text" placeholder="Enter a title" [(ngModel)]="title"></ion-input>
+            <p class="update-description">Description</p>
+            <ion-textarea class="update-input-description" placeholder="Enter a description" [(ngModel)]="description"></ion-textarea>
+           <button (click)="uploadFile()" class="update-media-save">Upload</button>
+         </div> 
+      </div>
+  
 </ion-content>
